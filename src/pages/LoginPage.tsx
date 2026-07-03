@@ -26,7 +26,7 @@ const LoginPage = () => {
 
   return (
     <div style={styles.root}>
-      <div style={styles.left}>
+      <div className="login-left-anim" style={styles.left}>
         <div style={styles.brand}>
           <div style={styles.logoMark}>
             <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
@@ -53,7 +53,7 @@ const LoginPage = () => {
       </div>
 
       <div style={styles.right}>
-        <div style={styles.card}>
+        <div className="login-card-anim" style={styles.card}>
           <div style={styles.cardHeader}>
             <h2 style={styles.cardTitle}>Welcome back</h2>
             <p style={styles.cardSub}>Sign in to your account to continue</p>
@@ -76,6 +76,7 @@ const LoginPage = () => {
                   <path d="M2 4a2 2 0 012-2h8a2 2 0 012 2v.5l-6 3.75L2 4.5V4zm0 1.5V12a2 2 0 002 2h8a2 2 0 002-2V5.5l-6 3.75L2 5.5z"/>
                 </svg>
                 <input
+                  className="input-focus"
                   style={styles.input}
                   type="email"
                   value={email}
@@ -93,6 +94,7 @@ const LoginPage = () => {
                   <path d="M8 1a4 4 0 00-4 4v1H3a1 1 0 00-1 1v7a1 1 0 001 1h10a1 1 0 001-1V7a1 1 0 00-1-1h-1V5a4 4 0 00-4-4zm2.5 5H5.5V5a2.5 2.5 0 015 0v1zM8 9a1 1 0 110 2 1 1 0 010-2z"/>
                 </svg>
                 <input
+                  className="input-focus"
                   style={styles.input}
                   type="password"
                   value={password}
@@ -103,14 +105,21 @@ const LoginPage = () => {
               </div>
             </div>
 
-            <button style={{ ...styles.btn, opacity: loading ? 0.7 : 1 }} type="submit" disabled={loading}>
+            <button className="btn-primary" style={{ ...styles.btn, opacity: loading ? 0.7 : 1 }} type="submit" disabled={loading}>
               {loading ? 'Signing in...' : 'Sign in'}
             </button>
           </form>
 
           <div style={styles.demoHint}>
             <span style={styles.demoLabel}>Demo credentials</span>
-            <code style={styles.demoCode}>demo@vai.com / demo1234</code>
+            <button
+              type="button"
+              className="demo-btn"
+              style={styles.demoFillBtn}
+              onClick={() => { setEmail('demo@vai.com'); setPassword('demo1234'); }}
+            >
+              Use Demo Account
+            </button>
           </div>
         </div>
       </div>
@@ -125,7 +134,7 @@ const styles: Record<string, React.CSSProperties> = {
   },
   left: {
     flex: 1,
-    background: 'linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #6366f1 100%)',
+    background: 'linear-gradient(160deg, #0f172a 0%, #0c2340 40%, #0369a1 100%)',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
@@ -275,7 +284,7 @@ const styles: Record<string, React.CSSProperties> = {
   btn: {
     width: '100%',
     padding: '13px',
-    background: 'linear-gradient(135deg, #6366f1 0%, #4f46e5 100%)',
+    background: 'linear-gradient(135deg, #0284c7 0%, #0369a1 100%)',
     color: '#fff',
     border: 'none',
     borderRadius: 10,
@@ -284,7 +293,7 @@ const styles: Record<string, React.CSSProperties> = {
     cursor: 'pointer',
     marginTop: 4,
     letterSpacing: '0.2px',
-    boxShadow: '0 4px 12px rgba(99,102,241,0.35)',
+    boxShadow: '0 4px 12px rgba(2,132,199,0.35)',
   },
   demoHint: {
     marginTop: 24,
@@ -292,20 +301,25 @@ const styles: Record<string, React.CSSProperties> = {
     background: '#f1f5f9',
     borderRadius: 10,
     display: 'flex',
-    flexDirection: 'column',
-    gap: 4,
+    alignItems: 'center',
+    justifyContent: 'space-between',
   },
   demoLabel: {
-    fontSize: 11,
+    fontSize: 12,
     fontWeight: 600,
     color: '#94a3b8',
     textTransform: 'uppercase',
     letterSpacing: '0.8px',
   },
-  demoCode: {
+  demoFillBtn: {
+    padding: '7px 16px',
+    background: '#fff',
+    color: '#0284c7',
+    border: '1.5px solid #bae6fd',
+    borderRadius: 8,
     fontSize: 13,
-    color: '#475569',
-    fontFamily: 'monospace',
+    fontWeight: 700,
+    cursor: 'pointer',
   },
 };
 

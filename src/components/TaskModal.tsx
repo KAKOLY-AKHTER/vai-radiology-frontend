@@ -44,7 +44,7 @@ const TaskModal: React.FC<TaskModalProps> = ({ task, selectedDate, onSave, onClo
 
   return (
     <div style={styles.overlay} onClick={onClose}>
-      <div style={styles.modal} onClick={(e) => e.stopPropagation()}>
+      <div className="modal-anim" style={styles.modal} onClick={(e) => e.stopPropagation()}>
         <div style={styles.modalHeader}>
           <div>
             <h2 style={styles.modalTitle}>{task?.id ? 'Edit Task' : 'Create Task'}</h2>
@@ -124,8 +124,8 @@ const TaskModal: React.FC<TaskModalProps> = ({ task, selectedDate, onSave, onClo
           </div>
 
           <div style={styles.footer}>
-            <button type="button" style={styles.cancelBtn} onClick={onClose}>Cancel</button>
-            <button type="submit" style={styles.saveBtn}>
+            <button type="button" className="btn-ghost" style={styles.cancelBtn} onClick={onClose}>Cancel</button>
+            <button type="submit" className="btn-primary" style={styles.saveBtn}>
               {task?.id ? 'Update Task' : 'Create Task'}
             </button>
           </div>
@@ -222,7 +222,7 @@ const styles: Record<string, React.CSSProperties> = {
   },
   addTagBtn: {
     padding: '11px 18px',
-    background: '#6366f1',
+    background: '#0284c7',
     color: '#fff',
     border: 'none',
     borderRadius: 10,
@@ -238,8 +238,8 @@ const styles: Record<string, React.CSSProperties> = {
     marginTop: 8,
   },
   tag: {
-    background: '#ede9fe',
-    color: '#7c3aed',
+    background: '#e0f2fe',
+    color: '#0284c7',
     fontSize: 12,
     padding: '4px 10px',
     borderRadius: 20,
@@ -252,7 +252,7 @@ const styles: Record<string, React.CSSProperties> = {
     background: 'none',
     border: 'none',
     cursor: 'pointer',
-    color: '#7c3aed',
+    color: '#0284c7',
     fontSize: 16,
     padding: 0,
     lineHeight: 1,
@@ -276,14 +276,14 @@ const styles: Record<string, React.CSSProperties> = {
   },
   saveBtn: {
     padding: '11px 24px',
-    background: 'linear-gradient(135deg, #6366f1 0%, #4f46e5 100%)',
+    background: 'linear-gradient(135deg, #0284c7 0%, #0369a1 100%)',
     color: '#fff',
     border: 'none',
     borderRadius: 10,
     cursor: 'pointer',
     fontWeight: 600,
     fontSize: 14,
-    boxShadow: '0 4px 12px rgba(99,102,241,0.3)',
+    boxShadow: '0 4px 12px rgba(2,132,199,0.3)',
   },
 };
 

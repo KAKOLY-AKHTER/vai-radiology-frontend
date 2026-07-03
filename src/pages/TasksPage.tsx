@@ -84,33 +84,38 @@ const TasksPage = () => {
           </div>
         </div>
         <nav style={styles.nav}>
-          <button style={styles.navLink} onClick={() => navigate('/annotate')}>
+          <button className="btn-nav" style={styles.navLink} onClick={() => navigate('/annotate')}>
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
               <rect x="2" y="2" width="12" height="12" rx="2" stroke="rgba(255,255,255,0.7)" strokeWidth="1.5"/>
               <path d="M5 8h6M8 5v6" stroke="rgba(255,255,255,0.7)" strokeWidth="1.5" strokeLinecap="round"/>
             </svg>
             Annotate
           </button>
-          <button style={styles.logoutBtn} onClick={() => { logout(); navigate('/'); }}>Logout</button>
+          <button className="btn-logout" style={styles.logoutBtn} onClick={() => { logout(); navigate('/'); }}>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M5 2H3a1 1 0 00-1 1v8a1 1 0 001 1h2M9 10l3-3-3-3M12 7H5" stroke="#fca5a5" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+            Logout
+          </button>
         </nav>
       </header>
 
       <div style={styles.content}>
-        <div style={styles.pageHeader}>
+        <div className="page-up" style={styles.pageHeader}>
           <div>
             <h1 style={styles.pageH1}>Task Board</h1>
             <p style={styles.pageSub}>Manage and organize your daily tasks</p>
           </div>
           <div style={styles.statsRow}>
-            <div style={styles.statCard}>
+            <div className="stat-card" style={styles.statCard}>
               <span style={styles.statNum}>{totalTasks}</span>
               <span style={styles.statLabel}>Total</span>
             </div>
-            <div style={styles.statCard}>
+            <div className="stat-card" style={styles.statCard}>
               <span style={{ ...styles.statNum, color: '#10b981' }}>{doneTasks}</span>
               <span style={styles.statLabel}>Done</span>
             </div>
-            <div style={styles.statCard}>
+            <div className="stat-card" style={styles.statCard}>
               <span style={{ ...styles.statNum, color: '#f59e0b' }}>{totalTasks - doneTasks}</span>
               <span style={styles.statLabel}>Pending</span>
             </div>
@@ -119,7 +124,7 @@ const TasksPage = () => {
 
         <div style={styles.toolbar}>
           <DateSelector selectedDate={selectedDate} onChange={setSelectedDate} />
-          <button style={styles.addBtn} onClick={() => { setEditingTask(null); setModalOpen(true); }}>
+          <button className="btn-primary" style={styles.addBtn} onClick={() => { setEditingTask(null); setModalOpen(true); }}>
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
               <path d="M8 3v10M3 8h10" stroke="white" strokeWidth="2" strokeLinecap="round"/>
             </svg>
@@ -145,13 +150,13 @@ const TasksPage = () => {
 const styles: Record<string, React.CSSProperties> = {
   root: { minHeight: '100vh', background: '#f8fafc', display: 'flex', flexDirection: 'column' },
   header: {
-    background: 'linear-gradient(135deg, #4f46e5 0%, #6366f1 100%)',
+    background: 'linear-gradient(135deg, #0f172a 0%, #0369a1 100%)',
     padding: '0 32px',
     height: 60,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
-    boxShadow: '0 2px 12px rgba(79,70,229,0.3)',
+    boxShadow: '0 2px 12px rgba(3,105,161,0.4)',
   },
   headerLeft: { display: 'flex', alignItems: 'center', gap: 12 },
   logoMark: {
@@ -166,28 +171,36 @@ const styles: Record<string, React.CSSProperties> = {
   logoText: { color: '#fff', fontWeight: 700, fontSize: 16 },
   logoSep: { color: 'rgba(255,255,255,0.4)', margin: '0 8px', fontSize: 16 },
   pageTitle: { color: 'rgba(255,255,255,0.8)', fontSize: 14 },
-  nav: { display: 'flex', alignItems: 'center', gap: 8 },
+  nav: { display: 'flex', alignItems: 'center', gap: 10 },
   navLink: {
     display: 'flex',
     alignItems: 'center',
-    gap: 6,
-    padding: '7px 16px',
-    background: 'rgba(255,255,255,0.15)',
-    color: 'rgba(255,255,255,0.9)',
-    border: '1px solid rgba(255,255,255,0.2)',
-    borderRadius: 8,
+    gap: 7,
+    padding: '8px 18px',
+    background: 'rgba(255,255,255,0.12)',
+    color: '#fff',
+    border: '1px solid rgba(255,255,255,0.25)',
+    borderRadius: 10,
     cursor: 'pointer',
     fontSize: 13,
     fontWeight: 600,
+    letterSpacing: '0.2px',
+    backdropFilter: 'blur(4px)',
+    transition: 'all 0.2s',
   },
   logoutBtn: {
-    padding: '7px 16px',
-    background: 'transparent',
-    color: 'rgba(255,255,255,0.7)',
-    border: '1px solid rgba(255,255,255,0.2)',
-    borderRadius: 8,
+    display: 'flex',
+    alignItems: 'center',
+    gap: 6,
+    padding: '8px 18px',
+    background: 'rgba(239,68,68,0.15)',
+    color: '#fca5a5',
+    border: '1px solid rgba(239,68,68,0.3)',
+    borderRadius: 10,
     cursor: 'pointer',
     fontSize: 13,
+    fontWeight: 600,
+    letterSpacing: '0.2px',
   },
   content: { padding: '32px', flex: 1 },
   pageHeader: {
@@ -210,7 +223,7 @@ const styles: Record<string, React.CSSProperties> = {
     gap: 2,
     minWidth: 70,
   },
-  statNum: { fontSize: 22, fontWeight: 800, color: '#6366f1' },
+  statNum: { fontSize: 22, fontWeight: 800, color: '#0284c7' },
   statLabel: { fontSize: 11, color: '#94a3b8', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.5px' },
   toolbar: {
     display: 'flex',
@@ -223,14 +236,14 @@ const styles: Record<string, React.CSSProperties> = {
     alignItems: 'center',
     gap: 8,
     padding: '10px 22px',
-    background: 'linear-gradient(135deg, #6366f1 0%, #4f46e5 100%)',
+    background: 'linear-gradient(135deg, #0284c7 0%, #0369a1 100%)',
     color: '#fff',
     border: 'none',
     borderRadius: 10,
     fontSize: 14,
     fontWeight: 600,
     cursor: 'pointer',
-    boxShadow: '0 4px 12px rgba(99,102,241,0.3)',
+    boxShadow: '0 4px 12px rgba(2,132,199,0.3)',
   },
 };
 

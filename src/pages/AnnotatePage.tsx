@@ -142,7 +142,7 @@ const AnnotatePage = () => {
           </div>
         </div>
         <nav style={styles.nav}>
-          <button style={styles.navLink} onClick={() => navigate('/tasks')}>
+          <button className="btn-nav" style={styles.navLink} onClick={() => navigate('/tasks')}>
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
               <rect x="2" y="3" width="12" height="2" rx="1" fill="rgba(255,255,255,0.7)"/>
               <rect x="2" y="7" width="8" height="2" rx="1" fill="rgba(255,255,255,0.7)"/>
@@ -150,11 +150,16 @@ const AnnotatePage = () => {
             </svg>
             Tasks
           </button>
-          <button style={styles.logoutBtn} onClick={() => { logout(); navigate('/'); }}>Logout</button>
+          <button className="btn-logout" style={styles.logoutBtn} onClick={() => { logout(); navigate('/'); }}>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M5 2H3a1 1 0 00-1 1v8a1 1 0 001 1h2M9 10l3-3-3-3M12 7H5" stroke="#fca5a5" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+            Logout
+          </button>
         </nav>
       </header>
 
-      <div style={styles.body}>
+      <div className="page-fade" style={styles.body}>
         {/* Sidebar */}
         <aside style={styles.sidebar}>
           <div style={styles.sideHeader}>
@@ -162,7 +167,7 @@ const AnnotatePage = () => {
             <span style={styles.imgCount}>{images.length}</span>
           </div>
 
-          <label style={styles.uploadBtn}>
+          <label className="upload-btn-hover" style={styles.uploadBtn}>
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
               <path d="M8 11V3M5 6l3-3 3 3" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
               <path d="M2 13h12" stroke="white" strokeWidth="2" strokeLinecap="round"/>
@@ -178,10 +183,11 @@ const AnnotatePage = () => {
             {images.map((img, idx) => (
               <div
                 key={img.id}
+                className="img-item"
                 style={{
                   ...styles.imageItem,
-                  background: idx === currentIndex ? '#ede9fe' : '#fff',
-                  borderColor: idx === currentIndex ? '#7c3aed' : '#e2e8f0',
+                  background: idx === currentIndex ? '#e0f2fe' : '#fff',
+                  borderColor: idx === currentIndex ? '#0284c7' : '#e2e8f0',
                 }}
                 onClick={() => { setCurrentIndex(idx); setCurrentPolygon([]); setDrawing(false); }}
               >
@@ -219,7 +225,7 @@ const AnnotatePage = () => {
               <div style={styles.toolbar}>
                 <div style={styles.toolbarLeft}>
                   {!drawing ? (
-                    <button style={styles.drawBtn} onClick={() => setDrawing(true)}>
+                    <button className="btn-primary" style={styles.drawBtn} onClick={() => setDrawing(true)}>
                       <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                         <path d="M2 14l4-1.5L13 5.5 10.5 3 3.5 10 2 14z" stroke="white" strokeWidth="1.5" strokeLinejoin="round"/>
                         <path d="M10.5 3l2.5 2.5" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
@@ -259,7 +265,7 @@ const AnnotatePage = () => {
                     {currentImage.annotations.map((ann, i) => {
                       const hue = (i * 60) % 360;
                       return (
-                        <div key={ann.id} style={styles.annItem}>
+                        <div key={ann.id} className="ann-item" style={styles.annItem}>
                           <div style={styles.annItemLeft}>
                             <div style={{ ...styles.annColor, background: `hsl(${hue}, 80%, 55%)` }} />
                             <div>
@@ -293,13 +299,13 @@ const AnnotatePage = () => {
 const styles: Record<string, React.CSSProperties> = {
   root: { minHeight: '100vh', display: 'flex', flexDirection: 'column', background: '#f8fafc' },
   header: {
-    background: 'linear-gradient(135deg, #4f46e5 0%, #6366f1 100%)',
+    background: 'linear-gradient(135deg, #0f172a 0%, #0369a1 100%)',
     padding: '0 32px',
     height: 60,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
-    boxShadow: '0 2px 12px rgba(79,70,229,0.3)',
+    boxShadow: '0 2px 12px rgba(3,105,161,0.4)',
     flexShrink: 0,
   },
   headerLeft: { display: 'flex', alignItems: 'center', gap: 12 },
@@ -310,17 +316,20 @@ const styles: Record<string, React.CSSProperties> = {
   logoText: { color: '#fff', fontWeight: 700, fontSize: 16 },
   logoSep: { color: 'rgba(255,255,255,0.4)', margin: '0 8px', fontSize: 16 },
   pageTitle: { color: 'rgba(255,255,255,0.8)', fontSize: 14 },
-  nav: { display: 'flex', alignItems: 'center', gap: 8 },
+  nav: { display: 'flex', alignItems: 'center', gap: 10 },
   navLink: {
-    display: 'flex', alignItems: 'center', gap: 6,
-    padding: '7px 16px', background: 'rgba(255,255,255,0.15)',
-    color: 'rgba(255,255,255,0.9)', border: '1px solid rgba(255,255,255,0.2)',
-    borderRadius: 8, cursor: 'pointer', fontSize: 13, fontWeight: 600,
+    display: 'flex', alignItems: 'center', gap: 7,
+    padding: '8px 18px', background: 'rgba(255,255,255,0.12)',
+    color: '#fff', border: '1px solid rgba(255,255,255,0.25)',
+    borderRadius: 10, cursor: 'pointer', fontSize: 13, fontWeight: 600,
+    letterSpacing: '0.2px', backdropFilter: 'blur(4px)',
   },
   logoutBtn: {
-    padding: '7px 16px', background: 'transparent',
-    color: 'rgba(255,255,255,0.7)', border: '1px solid rgba(255,255,255,0.2)',
-    borderRadius: 8, cursor: 'pointer', fontSize: 13,
+    display: 'flex', alignItems: 'center', gap: 6,
+    padding: '8px 18px', background: 'rgba(239,68,68,0.15)',
+    color: '#fca5a5', border: '1px solid rgba(239,68,68,0.3)',
+    borderRadius: 10, cursor: 'pointer', fontSize: 13, fontWeight: 600,
+    letterSpacing: '0.2px',
   },
   body: { display: 'flex', flex: 1, overflow: 'hidden' },
   sidebar: {
@@ -334,16 +343,16 @@ const styles: Record<string, React.CSSProperties> = {
   },
   sideTitle: { fontWeight: 700, fontSize: 14, color: '#1e293b' },
   imgCount: {
-    background: '#ede9fe', color: '#7c3aed', fontSize: 12,
+    background: '#e0f2fe', color: '#0284c7', fontSize: 12,
     fontWeight: 700, padding: '2px 8px', borderRadius: 20,
   },
   uploadBtn: {
     display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
     margin: '16px', padding: '11px',
-    background: 'linear-gradient(135deg, #6366f1 0%, #4f46e5 100%)',
+    background: 'linear-gradient(135deg, #0284c7 0%, #0369a1 100%)',
     color: '#fff', borderRadius: 10, cursor: 'pointer',
     fontWeight: 600, fontSize: 13,
-    boxShadow: '0 4px 10px rgba(99,102,241,0.3)',
+    boxShadow: '0 4px 10px rgba(2,132,199,0.3)',
   },
   imageList: { flex: 1, overflowY: 'auto', padding: '0 12px 12px' },
   noImages: { color: '#94a3b8', fontSize: 13, textAlign: 'center', padding: '24px 0' },
@@ -380,10 +389,10 @@ const styles: Record<string, React.CSSProperties> = {
   toolbarLeft: { display: 'flex', gap: 8 },
   drawBtn: {
     display: 'flex', alignItems: 'center', gap: 8, padding: '10px 20px',
-    background: 'linear-gradient(135deg, #6366f1 0%, #4f46e5 100%)',
+    background: 'linear-gradient(135deg, #0284c7 0%, #0369a1 100%)',
     color: '#fff', border: 'none', borderRadius: 10,
     cursor: 'pointer', fontWeight: 600, fontSize: 14,
-    boxShadow: '0 4px 10px rgba(99,102,241,0.3)',
+    boxShadow: '0 4px 10px rgba(2,132,199,0.3)',
   },
   cancelBtn: {
     padding: '10px 18px', background: '#f1f5f9', color: '#475569',
@@ -408,7 +417,7 @@ const styles: Record<string, React.CSSProperties> = {
     marginBottom: 14, display: 'flex', alignItems: 'center', gap: 8,
   },
   annBadge: {
-    background: '#ede9fe', color: '#7c3aed', fontSize: 12,
+    background: '#e0f2fe', color: '#0284c7', fontSize: 12,
     fontWeight: 700, padding: '2px 8px', borderRadius: 20,
   },
   noAnn: { color: '#94a3b8', fontSize: 13 },

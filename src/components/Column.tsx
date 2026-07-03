@@ -23,7 +23,7 @@ interface ColumnProps {
 
 const Column: React.FC<ColumnProps> = ({ columnId, title, tasks, onEdit, onDelete, color, icon }) => {
   return (
-    <div style={styles.column}>
+    <div className="anim-col" style={styles.column}>
       <div style={styles.header}>
         <div style={styles.headerLeft}>
           <span style={{ fontSize: 18 }}>{icon}</span>

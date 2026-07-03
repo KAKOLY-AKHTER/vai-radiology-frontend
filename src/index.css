@@ -13,12 +13,12 @@ body {
 }
 
 :root {
-  --primary: #6366f1;
-  --primary-dark: #4f46e5;
-  --primary-light: #e0e7ff;
-  --success: #10b981;
-  --warning: #f59e0b;
-  --danger: #ef4444;
+  --primary: #0284c7;
+  --primary-dark: #0369a1;
+  --primary-light: #e0f2fe;
+  --success: #059669;
+  --warning: #d97706;
+  --danger: #dc2626;
   --gray-50: #f8fafc;
   --gray-100: #f1f5f9;
   --gray-200: #e2e8f0;
@@ -60,4 +60,217 @@ input, select, textarea {
 }
 ::-webkit-scrollbar-thumb:hover {
   background: var(--gray-400);
+}
+
+/* ── Page & element animations ── */
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-20px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(20px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.94); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.5; }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+
+/* Page containers */
+.page-fade   { animation: fadeIn 0.35s ease; }
+.page-up     { animation: slideUp 0.4s ease; }
+
+/* Cards */
+.anim-card {
+  animation: slideUp 0.35s ease both;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+.anim-card:hover {
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12) !important;
+  transform: translateY(-3px);
+}
+
+/* Columns */
+.anim-col {
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+.anim-col:hover {
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08) !important;
+}
+
+/* Stat cards */
+.stat-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  animation: scaleIn 0.3s ease both;
+}
+.stat-card:hover {
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 8px 20px rgba(2,132,199,0.15) !important;
+}
+
+/* Sidebar image items */
+.img-item {
+  transition: background 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+}
+.img-item:hover {
+  transform: translateX(3px);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+}
+
+/* Annotation items */
+.ann-item {
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+.ann-item:hover {
+  background: #f0f9ff !important;
+  transform: translateX(2px);
+}
+
+/* Header */
+.header-anim {
+  animation: slideInLeft 0.4s ease;
+}
+
+/* Modal */
+.modal-anim {
+  animation: scaleIn 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Login card */
+.login-card-anim {
+  animation: slideInRight 0.45s cubic-bezier(0.34, 1.2, 0.64, 1);
+}
+
+/* Login left panel */
+.login-left-anim {
+  animation: slideInLeft 0.45s ease;
+}
+
+/* Task card stagger */
+.anim-card:nth-child(1) { animation-delay: 0.05s; }
+.anim-card:nth-child(2) { animation-delay: 0.10s; }
+.anim-card:nth-child(3) { animation-delay: 0.15s; }
+.anim-card:nth-child(4) { animation-delay: 0.20s; }
+
+/* Input focus glow */
+.input-focus {
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.input-focus:focus {
+  border-color: #0284c7 !important;
+  box-shadow: 0 0 0 3px rgba(2,132,199,0.15);
+  background: #fff !important;
+}
+
+/* Upload button pulse on hover */
+.upload-btn-hover {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.upload-btn-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(2,132,199,0.4) !important;
+}
+
+/* ── Button hover animations ── */
+
+.btn-primary {
+  transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(2,132,199,0.4) !important;
+  opacity: 0.95;
+}
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-nav {
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+}
+.btn-nav:hover {
+  background: rgba(255,255,255,0.22) !important;
+  border-color: rgba(255,255,255,0.45) !important;
+  transform: translateY(-1px);
+}
+.btn-nav:active {
+  transform: translateY(0);
+}
+
+.btn-logout {
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+.btn-logout:hover {
+  background: rgba(239,68,68,0.28) !important;
+  transform: translateY(-1px);
+}
+.btn-logout:active {
+  transform: translateY(0);
+}
+
+.btn-ghost {
+  transition: background 0.15s ease, transform 0.15s ease, border-color 0.15s ease;
+}
+.btn-ghost:hover {
+  background: #f1f5f9 !important;
+  transform: translateY(-1px);
+}
+.btn-ghost:active {
+  transform: translateY(0);
+}
+
+.btn-danger {
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+.btn-danger:hover {
+  background: #fef2f2 !important;
+  transform: translateY(-1px);
+}
+
+.btn-icon {
+  transition: background 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+}
+.btn-icon:hover {
+  transform: scale(1.08);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+}
+.btn-icon:active {
+  transform: scale(0.96);
+}
+
+.demo-btn:hover {
+  background: #eff6ff !important;
+  border-color: #93c5fd !important;
+  transform: translateY(-1px);
+}
+
+.task-card {
+  transition: box-shadow 0.2s ease, transform 0.15s ease;
+}
+.task-card:hover {
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1) !important;
+  transform: translateY(-2px);
 }

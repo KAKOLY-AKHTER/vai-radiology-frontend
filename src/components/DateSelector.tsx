@@ -44,13 +44,13 @@ const styles: Record<string, React.CSSProperties> = {
     gap: 8,
     padding: '10px 18px',
     background: '#fff',
-    color: '#4f46e5',
-    border: '1.5px solid #e0e7ff',
+    color: '#0369a1',
+    border: '1.5px solid #bae6fd',
     borderRadius: 10,
     fontSize: 14,
     fontWeight: 600,
     cursor: 'pointer',
-    boxShadow: '0 1px 4px rgba(99,102,241,0.1)',
+    boxShadow: '0 1px 4px rgba(2,132,199,0.1)',
   },
 };
 

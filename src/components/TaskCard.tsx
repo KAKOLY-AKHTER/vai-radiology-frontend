@@ -33,6 +33,7 @@ const TaskCard: React.FC<TaskCardProps> = ({ task, index, onEdit, onDelete }) =>
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
+          className="anim-card"
           style={{
             background: '#fff',
             borderRadius: 12,
@@ -53,12 +54,12 @@ const TaskCard: React.FC<TaskCardProps> = ({ task, index, onEdit, onDelete }) =>
               {pc.label}
             </span>
             <div style={styles.actions}>
-              <button style={styles.iconBtn} onClick={() => onEdit(task)} title="Edit">
+              <button className="btn-icon" style={styles.iconBtn} onClick={() => onEdit(task)} title="Edit">
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                   <path d="M9.5 2.5l2 2L4 12H2v-2l7.5-7.5z" stroke="#6366f1" strokeWidth="1.5" strokeLinejoin="round"/>
                 </svg>
               </button>
-              <button style={{ ...styles.iconBtn, ...styles.deleteBtn }} onClick={() => task.id && onDelete(task.id)} title="Delete">
+              <button className="btn-icon" style={{ ...styles.iconBtn, ...styles.deleteBtn }} onClick={() => task.id && onDelete(task.id)} title="Delete">
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                   <path d="M2 3.5h10M5.5 3.5V2h3v1.5M5 6v4.5M9 6v4.5M3.5 3.5l.5 8h6l.5-8" stroke="#ef4444" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
@@ -152,8 +153,8 @@ const styles: Record<string, React.CSSProperties> = {
     gap: 4,
   },
   tag: {
-    background: '#ede9fe',
-    color: '#7c3aed',
+    background: '#e0f2fe',
+    color: '#0284c7',
     fontSize: 11,
     padding: '2px 8px',
     borderRadius: 20,
