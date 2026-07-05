@@ -32,43 +32,42 @@ const TaskCard: React.FC<TaskCardProps> = ({ task, index, onEdit, onDelete }) =>
         <div
           ref={provided.innerRef}
           {...provided.draggableProps}
-          className="anim-card"
+          {...provided.dragHandleProps}
           style={{
-            background: '#fff',
+            background: snapshot.isDragging ? '#f0f9ff' : '#fff',
             borderRadius: 12,
             padding: '14px 16px',
             marginBottom: 10,
             border: snapshot.isDragging ? '1.5px solid #0284c7' : '1px solid #e2e8f0',
             boxShadow: snapshot.isDragging
-              ? '0 12px 28px rgba(2,132,199,0.2)'
+              ? '0 8px 24px rgba(2,132,199,0.25)'
               : '0 1px 3px rgba(0,0,0,0.04)',
-            transition: 'box-shadow 0.15s',
+            cursor: snapshot.isDragging ? 'grabbing' : 'grab',
+            userSelect: 'none',
             ...provided.draggableProps.style,
           }}
         >
           <div style={styles.top}>
-            <div style={styles.leftGroup}>
-              <div
-                {...provided.dragHandleProps}
-                style={styles.gripHandle}
-                title="Drag to move"
-              >
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="#cbd5e1">
-                  <circle cx="4" cy="3" r="1.2"/><circle cx="4" cy="7" r="1.2"/><circle cx="4" cy="11" r="1.2"/>
-                  <circle cx="10" cy="3" r="1.2"/><circle cx="10" cy="7" r="1.2"/><circle cx="10" cy="11" r="1.2"/>
-                </svg>
-              </div>
-              <span style={{ ...styles.badge, color: pc.color, background: pc.bg }}>
-                {pc.label}
-              </span>
-            </div>
+            <span style={{ ...styles.badge, color: pc.color, background: pc.bg }}>
+              {pc.label}
+            </span>
             <div style={styles.actions}>
-              <button className="btn-icon" style={styles.iconBtn} onClick={() => onEdit(task)} title="Edit">
+              <button
+                style={styles.iconBtn}
+                onMouseDown={(e) => e.stopPropagation()}
+                onClick={() => onEdit(task)}
+                title="Edit"
+              >
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                   <path d="M9.5 2.5l2 2L4 12H2v-2l7.5-7.5z" stroke="#6366f1" strokeWidth="1.5" strokeLinejoin="round"/>
                 </svg>
               </button>
-              <button className="btn-icon" style={{ ...styles.iconBtn, ...styles.deleteBtn }} onClick={() => task.id && onDelete(task.id)} title="Delete">
+              <button
+                style={{ ...styles.iconBtn, ...styles.deleteBtn }}
+                onMouseDown={(e) => e.stopPropagation()}
+                onClick={() => task.id && onDelete(task.id)}
+                title="Delete"
+              >
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                   <path d="M2 3.5h10M5.5 3.5V2h3v1.5M5 6v4.5M9 6v4.5M3.5 3.5l.5 8h6l.5-8" stroke="#ef4444" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
@@ -107,19 +106,6 @@ const styles: Record<string, React.CSSProperties> = {
     justifyContent: 'space-between',
     alignItems: 'center',
     marginBottom: 10,
-  },
-  leftGroup: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: 8,
-  },
-  gripHandle: {
-    cursor: 'grab',
-    display: 'flex',
-    alignItems: 'center',
-    padding: '2px 4px',
-    borderRadius: 4,
-    transition: 'background 0.15s',
   },
   badge: {
     fontSize: 11,
