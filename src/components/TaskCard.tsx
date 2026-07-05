@@ -32,27 +32,36 @@ const TaskCard: React.FC<TaskCardProps> = ({ task, index, onEdit, onDelete }) =>
         <div
           ref={provided.innerRef}
           {...provided.draggableProps}
-          {...provided.dragHandleProps}
           className="anim-card"
           style={{
             background: '#fff',
             borderRadius: 12,
             padding: '14px 16px',
             marginBottom: 10,
-            border: '1px solid #e2e8f0',
+            border: snapshot.isDragging ? '1.5px solid #0284c7' : '1px solid #e2e8f0',
             boxShadow: snapshot.isDragging
-              ? '0 12px 28px rgba(0,0,0,0.15)'
+              ? '0 12px 28px rgba(2,132,199,0.2)'
               : '0 1px 3px rgba(0,0,0,0.04)',
-            cursor: 'grab',
-            transition: 'box-shadow 0.2s, transform 0.1s',
-            transform: snapshot.isDragging ? 'rotate(1.5deg)' : 'none',
+            transition: 'box-shadow 0.15s',
             ...provided.draggableProps.style,
           }}
         >
           <div style={styles.top}>
-            <span style={{ ...styles.badge, color: pc.color, background: pc.bg }}>
-              {pc.label}
-            </span>
+            <div style={styles.leftGroup}>
+              <div
+                {...provided.dragHandleProps}
+                style={styles.gripHandle}
+                title="Drag to move"
+              >
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="#cbd5e1">
+                  <circle cx="4" cy="3" r="1.2"/><circle cx="4" cy="7" r="1.2"/><circle cx="4" cy="11" r="1.2"/>
+                  <circle cx="10" cy="3" r="1.2"/><circle cx="10" cy="7" r="1.2"/><circle cx="10" cy="11" r="1.2"/>
+                </svg>
+              </div>
+              <span style={{ ...styles.badge, color: pc.color, background: pc.bg }}>
+                {pc.label}
+              </span>
+            </div>
             <div style={styles.actions}>
               <button className="btn-icon" style={styles.iconBtn} onClick={() => onEdit(task)} title="Edit">
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -98,6 +107,19 @@ const styles: Record<string, React.CSSProperties> = {
     justifyContent: 'space-between',
     alignItems: 'center',
     marginBottom: 10,
+  },
+  leftGroup: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: 8,
+  },
+  gripHandle: {
+    cursor: 'grab',
+    display: 'flex',
+    alignItems: 'center',
+    padding: '2px 4px',
+    borderRadius: 4,
+    transition: 'background 0.15s',
   },
   badge: {
     fontSize: 11,
